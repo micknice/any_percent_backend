@@ -49,14 +49,62 @@ describe(' GET /api/exercises', ()=> {
             
         })
     })
-    // test('Get req w/ params returns exercise with specified name', () => {
-    //     return request(app)
-    //     .get('api/exercises/Barbell Bicep Curls')
-    //     .expect(200)
-    //     .then(res => {
-    //         const exercise = res.body.exercise
-    //         expect(exercise.name).toBe('Bicep Barbell Curls')
-    //     })
-    // })
+    test('Get req w/ params returns exercise with specified name', () => {
+        return request(app)
+        .get('/api/exercises/Barbell Bicep Curls')
+        .expect(200)
+        .then(res => {
+            const resBodyExercise = res.body.exercise;
+            expect(resBodyExercise.name).toBe('Barbell Bicep Curls')            
+        })
+    })
+})
+
+describe('api/exercises error handling ', () => {
+    test('get req with invalid exercise name param returns 400 status and and invalid exercise name msg', () => {
+        return request(app)
+        .get('/api/exercises/boobelBarcepcrul')
+        .expect(400)
+        .then(res => {
+            const msg = res.body.msg
+            expect(msg).toBe('invalid exercise name')
+        })
+    })
+    test('get req with invalid type query returns 400 status and invalid type query msg', () => {
+        return request(app)
+        .get('/api/exercises?type=invalid')
+        .expect(400)
+        .then(res => {
+            const msg = res.body.msg;
+            expect(msg).toBe('invalid type field')
+        })
+    })
+    test('get req with invalid movementType query returns 400 status and invalid movementType query msg', () => {
+        return request(app)
+        .get('/api/exercises?movementType=invalid')
+        .expect(400)
+        .then(res => {
+            const msg = res.body.msg;
+            expect(msg).toBe('invalid movementType field')
+        })
+    })
+    test('get req with invalid bodyPart query returns 400 status invalid type query', () => {
+        return request(app)
+        .get('/api/exercises?bodyPart=invalid')
+        .expect(400)
+        .then(res => {
+            const msg = res.body.msg;
+            expect(msg).toBe('invalid bodyPart field')
+        })
+    })
+    test('get req with more than one invalid query fields returns 400 status invalid query fields msg', () => {
+        return request(app)
+        .get('/api/exercises?bodyPart=invalid&type=invalid')
+        .expect(400)
+        .then(res => {
+            const msg = res.body.msg;
+            expect(msg).toBe('invalid query fields')
+        })
+    })
 })
 

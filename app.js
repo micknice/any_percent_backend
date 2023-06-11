@@ -4,6 +4,7 @@ const app = express();
 const mongoose = require('mongoose');
 const mongoString = process.env.DATABASE_URL;
 const {Exercise} = require('./data/exercises')
+const {handleCustomErrors, handleServerErrors} = require('./controllers/error_handling_controller')
 
 const {getExercises, getExerciseByName} = require('./controllers/exercise_controller');
 
@@ -21,9 +22,9 @@ app.get('/api/exercises/:name', getExerciseByName)
 app.use('/*', (req, res)=> {
 res.status(404).send({msg: 'not found'});
 })
-// app.use(handleCustomErrors);
+app.use(handleCustomErrors);
 // app.use(handlePSQL400Error);
-// app.use(handleServerErrors);
+app.use(handleServerErrors);
 
 // app.listen(3000, () => {
 //     console.log(`Server Started at ${3000}`)
