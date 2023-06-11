@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const mongoString = process.env.DATABASE_URL;
 const {Exercise} = require('./data/exercises')
 
-const {getExercises} = require('./controllers/exercise_controller');
+const {getExercises, getExerciseByName} = require('./controllers/exercise_controller');
 
 const cors = require('cors');
 app.use(cors());
@@ -13,8 +13,9 @@ app.use(express.json());
 
 // app.get('/api', getApi);
 
+// gets all exercises in db w/ no query, queries to filter by type, movementType and bodyPart
 app.get('/api/exercises', getExercises);
-// app.get('/api/exercises/:name', getExerciseByName)
+app.get('/api/exercises/:name', getExerciseByName)
 
 
 app.use('/*', (req, res)=> {

@@ -632,5 +632,13 @@ const seedExercises = [
       }
 ]
 
+const exerciseNamesArray = seedExercises.map(x => x.name);
 
-module.exports = seedExercises;
+const typeArray = seedExercises.map(x => x.type);
+
+const movementTypeArray = seedExercises.map(x => x.movementType);
+
+const bodyPartArray = seedExercises.map(x => x.bodyPart)
+
+
+module.exports = {seedExercises, exerciseNamesArray, typeArray, movementTypeArray, bodyPartArray};

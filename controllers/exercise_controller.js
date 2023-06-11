@@ -1,17 +1,29 @@
 const app = require('../app');
-const {fetchExercises} = require('../models/exercise_model');
+const {fetchExercises, fetchExerciseByName} = require('../models/exercise_model');
+// const {exerciseNamesArray} = import('../data/exercises')
 
 
 const getExercises = (req, res, next) => {   
-    const {type, movementType, bodyPart} = req.query;
-    console.log(bodyPart)    
+    const {type, movementType, bodyPart} = req.query;   
     return fetchExercises(type, movementType, bodyPart)
-    .then((result) => {
-    console.log('fetchExercises returned');
+    .then((result) => {   
     res.status(200).send({exercises: result})
     })
     .catch((err) => {next(err)})
 }
 
+const getExerciseByName = (req, res, next) => {
+    console.log('here')
+    console.log('req', req.params)
+    const {name} = req.params
 
-module.exports = {getExercises};
+    
+    return fetchExerciseByName(name)
+    .then((result) => {
+    res.status(200).send({exercise: result})
+    })
+    .catch((err) => {next(err)})
+}
+
+
+module.exports = {getExercises, getExerciseByName};
