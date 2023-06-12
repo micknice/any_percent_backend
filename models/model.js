@@ -35,12 +35,8 @@ const sessionSchema = new mongoose.Schema({
         required: true,
         type: [],
         default: []
-    },
-    sets: {
-        required: true,
-        type: [],
-        default: []
-    } 
+    }
+    
 })
 const stackSchema = new mongoose.Schema({
   sessionId: {
