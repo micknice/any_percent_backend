@@ -26,6 +26,7 @@ const postNewUser = (req, res, next) => {
     const {userUID, userName, defaultWeightUnit} = req.body
     return insertNewUser(userUID, userName, defaultWeightUnit)
     .then((result) => {
+        
         res.status(201).send({user: result})
     })
     .catch((err) => {next(err)})

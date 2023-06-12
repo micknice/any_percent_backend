@@ -44,7 +44,11 @@ const updateUser = (userUID, userName, defaultWeightUnit) => {
     if (defaultWeightUnit) {update.defaultWeightUnit = defaultWeightUnit}
     return User.findOneAndUpdate(filter, update, updateOptions)
     .then(result => {
-        return result
+        if(result) {
+            return result
+        } else {
+            return 'no user with that UID'
+        }
     })
 
 }
