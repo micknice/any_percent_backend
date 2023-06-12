@@ -13,7 +13,7 @@ afterAll(done => {
     done()
 })
 
-// Tests for api/exercises enpoints
+// Tests for api/exercises endpoints
 describe(' GET /api/exercises', ()=> {
     test('GET req w/ no queries returns an array of all exercises in db', () => {
         return request(app)
@@ -108,3 +108,46 @@ describe('api/exercises error handling ', () => {
     })
 })
 
+// Tests for api/users endpoints
+describe(' GET /api/users', () => {
+    test(' GET request w/ no params returns list of all users in db', () => {
+        return request(app)
+        .get('/api/users')
+        .expect(200)
+        .then(res => {
+            const resBodyUsers = res.body.users
+            expect(resBodyUsers.length).toBe(10)
+            resBodyUsers.forEach(user => {
+                expect(user).toMatchObject({
+                    _id: expect.any(String),
+                    userUID: expect.any(String),
+                    userName: expect.any(String),
+                    userTrainingLog: expect.any(Array),
+                    defaultWeightUnit: expect.any(String),
+                })
+            })
+        })
+    })
+    test(' GET req w/ valid userUID in param returns 200 status and user object matching UID ', () => {
+        return request(app)
+        .get('/api/users/osA6t3TkUdG2oVeQp8WrI5yLjHs7')
+        .expect(200)
+        .then(res => {
+            const resBodyUser = res.body.user
+            expect(resBodyUser.userUID).toBe('osA6t3TkUdG2oVeQp8WrI5yLjHs7')
+        })
+    })
+})
+
+describe(' /api/users error handling', () => {
+    test('get req w/ invalid userUID returns 404 status and user not found msg', () => {
+        return request(app)
+        .get('/api/users/osA6t3TkUdG2oVeQp8WrI5y')
+        .expect(404)
+        .then(res => {
+            console.log(res)
+            const resBodyMsg = res.body.msg
+            expect(resBodyMsg).toBe('user not found')
+        })
+    })
+})

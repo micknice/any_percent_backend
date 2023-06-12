@@ -1,7 +1,8 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
-const {Exercise} = require('../models/model');
-const seedExercises = require('../data/exercises');
+const {Exercise, User} = require('../models/model');
+const userArray = require('../test_data/test_user_data');
+const {seedExercises} = require('../data/exercises');
 const mongoString = process.env.DATABASE_URL;
 
 mongoose
@@ -15,8 +16,12 @@ mongoose
 
 
 const seedDb = async () => {
+
     await Exercise.deleteMany({});
+    await User.deleteMany({});
+
     await Exercise.insertMany(seedExercises);
+    await User.insertMany(userArray);
 };
 
 seedDb().then(()=> {

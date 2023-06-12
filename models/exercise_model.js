@@ -57,8 +57,8 @@ const fetchExerciseByName = (name) => {
         })
     } else {
        return Promise.reject({
-        status: 400,
-        msg: 'invalid exercise name'
+            status: 400,
+            msg: 'invalid exercise name'
        }) 
     }
 

@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 const userSchema = new mongoose.Schema({
     userUID: {
         required: true,
-        type: String
+        type: String,
+        unique: true
     },
     userName: {
         required: true,
@@ -11,7 +12,7 @@ const userSchema = new mongoose.Schema({
     },
     userTrainingLog: {
         required: true,
-        type: [sessionSchema]
+        type: []
     },
     defaultWeightUnit: {
         required: true,
@@ -20,36 +21,36 @@ const userSchema = new mongoose.Schema({
     
 })
 
-const sessionSchema = new mongoose.Schema({
-    userId: {
-        required: true,
-        type: Number
-    },
-    date: {
-        required: true,
-        type: String
-    },
-    exercises: {
-        required: true,
-        type: []
+// const sessionSchema = new mongoose.Schema({
+//     userId: {
+//         required: true,
+//         type: Number
+//     },
+//     date: {
+//         required: true,
+//         type: String
+//     },
+//     exercises: {
+//         required: true,
+//         type: []
 
-    },
-    sets: {
-        required: true,
-        type: []
-    } 
+//     },
+//     sets: {
+//         required: true,
+//         type: []
+//     } 
 
-})
-const liftSchema = new mongoose.Schema({
-    lift: {
-        required: true,
-        type: exerciseSchema
-    },
-    sets: {
-        required: true, 
-        type: [setSchema]
-    }
-})
+// })
+// const liftSchema = new mongoose.Schema({
+//     lift: {
+//         required: true,
+//         type: []
+//     },
+//     sets: {
+//         required: true, 
+//         type: []
+//     }
+// })
 
 const exerciseSchema = new mongoose.Schema({   
     name: {
@@ -74,33 +75,35 @@ const exerciseSchema = new mongoose.Schema({
     }
 })
 
-const setSchema = new mongoose.Schema({
-    exerciseName: {
-        required: true,
-        type: String
-    },
-    weight: {
-        required: true,
-        type: Number
-    },
-    weightUnit: {
-        required: true,
-        type: String
-    },    
-    repsPerformed: {
-        required: true,
-        type: Number
-    },
-    targetReps: {
-        required: false,
-        type: Number
-    },
-    setType: {
-        required: true,
-        type: String
-    }
-})
+// const setSchema = new mongoose.Schema({
+//     exerciseName: {
+//         required: true,
+//         type: String
+//     },
+//     weight: {
+//         required: true,
+//         type: Number
+//     },
+//     weightUnit: {
+//         required: true,
+//         type: String
+//     },    
+//     repsPerformed: {
+//         required: true,
+//         type: Number
+//     },
+//     targetReps: {
+//         required: false,
+//         type: Number
+//     },
+//     setType: {
+//         required: true,
+//         type: String
+//     }
+// })
 
 const Exercise = mongoose.model('Exercise', exerciseSchema)
 
-module.exports = {Exercise}
+const User = mongoose.model('Users', userSchema)
+
+module.exports = {Exercise, User}

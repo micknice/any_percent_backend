@@ -21,6 +21,9 @@ const handleCustomErrors = (err, req, res, next) => {
     else if (err.msg === 'invalid exercise name' && err.status === 400) {
         res.status(400).send({msg: 'invalid exercise name'})
     } 
+    else if (err.msg === 'user not found' && err.status === 404) {
+        res.status(404).send({msg: 'user not found'})
+    } 
     else {
         next(err);
     }
