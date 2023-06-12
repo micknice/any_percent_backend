@@ -1,8 +1,16 @@
 const app = require('../app');
 
 const handleServerErrors = (err, req, res, next) => {
-    console.log(err)
+    
     res.status(500).send({msg: 'internal server error'})
+}
+const handleMongoDBErrors = (err, req, res, next) => {
+    if (err.code === 11000) {
+        
+        res.status(400).send({msg: 'no duplicate keys'})
+    } else {
+        next(err)
+    }
 }
 
 const handleCustomErrors = (err, req, res, next) => {
@@ -29,4 +37,4 @@ const handleCustomErrors = (err, req, res, next) => {
     }
 }
 
-module.exports = {handleCustomErrors, handleServerErrors}
+module.exports = {handleCustomErrors, handleServerErrors, handleMongoDBErrors}
