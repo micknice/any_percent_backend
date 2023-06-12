@@ -16,14 +16,20 @@ mongoose
 
 
 const seedDb = async () => {
+    console.log('seeding')
 
     await Exercise.deleteMany({});
-    await User.deleteMany({});
-
+    
     await Exercise.insertMany(seedExercises);
+    await User.deleteMany({});
     await User.insertMany(userArray);
 };
 
 seedDb().then(()=> {
     mongoose.connection.close();
 });
+
+
+
+
+module.exports = {seedDb}

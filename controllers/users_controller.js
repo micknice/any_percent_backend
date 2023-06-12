@@ -1,5 +1,5 @@
 const app = require('../app');
-const {fetchUserByUID, fetchUsers, insertNewUser} = require('../models/users_model');
+const {fetchUserByUID, fetchUsers, insertNewUser, updateUser} = require('../models/users_model');
 const multer = require('multer');
 const upload = multer();
 
@@ -14,7 +14,6 @@ const getUsers = (req, res, next) => {
 }
 
 const getUserByUID = (req, res, next) => {
-    console.log('getbyUIDInvoked')
     const {UID} = req.params;
     return fetchUserByUID(UID)
     .then((result) => {
@@ -32,5 +31,13 @@ const postNewUser = (req, res, next) => {
     .catch((err) => {next(err)})
 }
 
+const patchUser = (req, res, next) => {    
+    const {userUID, userName, defaultWeightUnit} = req.body
+    return updateUser(userUID, userName, defaultWeightUnit)
+    .then((result) => {
+        res.status(200).send({updatedUser: result})
+    })
+}
 
-module.exports = {getUsers, getUserByUID, postNewUser};
+
+module.exports = {getUsers, getUserByUID, postNewUser, patchUser};

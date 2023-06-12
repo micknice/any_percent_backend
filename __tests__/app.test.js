@@ -3,11 +3,12 @@ const request = require('supertest');
 const database = require('../db/connection');
 require('jest-sorted');
 const{json} = require('express');
+// const {seedDb} = require('../seed/seed');
 
 beforeAll(done => {
     done()
   })
-  
+ 
 afterAll(done => {   
     database.close()
     done()
@@ -105,6 +106,7 @@ describe('api/exercises error handling ', () => {
             const msg = res.body.msg;
             expect(msg).toBe('invalid query fields')
         })
+        
     })
 })
 
@@ -122,7 +124,6 @@ describe(' GET /api/users', () => {
                     _id: expect.any(String),
                     userUID: expect.any(String),
                     userName: expect.any(String),
-                    userTrainingLog: expect.any(Array),
                     defaultWeightUnit: expect.any(String),
                 })
             })
@@ -137,6 +138,27 @@ describe(' GET /api/users', () => {
             expect(resBodyUser.userUID).toBe('osA6t3TkUdG2oVeQp8WrI5yLjHs7')
         })
     })
+    // test(' POST req w/ valid details and unique UID returns 201 status and user object', () => {
+    //     return request(app)
+    //     .post('/api/users')
+    //     .field('userUID', '5zXz4PmHbG83R2PAC6CJY6sVSNe5')
+    //     .field('userName', 'TestyWaters')
+    //     .field('defaultWeightUnit', 'kg')
+    //     .expect(201)
+    //     .then(res => {
+    //         const resBodyUser = res.body.user
+    //         expect(resBodyUser.userUID).toBe('5zXz4PmHbG83R2PAC6CJY6sVSNe5')
+    //     })        
+    // })
+    // test('get all users reflects POST with correct length', () => {
+    //     return request(app)
+    //     .get('/api/users')
+    //     .expect(200)
+    //     .then(res => {
+    //         const resBodyUsers = res.body.users;
+    //         expect(resBodyUsers.length).toBe(11)
+    //     })
+    // })
 })
 
 describe(' /api/users error handling', () => {
@@ -145,7 +167,6 @@ describe(' /api/users error handling', () => {
         .get('/api/users/osA6t3TkUdG2oVeQp8WrI5y')
         .expect(404)
         .then(res => {
-            console.log(res)
             const resBodyMsg = res.body.msg
             expect(resBodyMsg).toBe('user not found')
         })

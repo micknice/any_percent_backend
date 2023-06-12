@@ -1,8 +1,6 @@
 const database = require('../db/connection');
 const {User} = require('../models/model');
 
-
-
 const fetchUsers = () => {
     return User.find()
     .then((result) => {
@@ -36,8 +34,20 @@ const insertNewUser = (userUID, userName, defaultWeightUnit) => {
     .then(result => {
         return result
     })
+}
+
+const updateUser = (userUID, userName, defaultWeightUnit) => {
+    const filter = {userUID: userUID};
+    const update = {}
+    const updateOptions = {new: true}
+    if (userName) {update.userName = userName}
+    if (defaultWeightUnit) {update.defaultWeightUnit = defaultWeightUnit}
+    return User.findOneAndUpdate(filter, update, updateOptions)
+    .then(result => {
+        return result
+    })
 
 }
 
 
-module.exports = {fetchUsers, fetchUserByUID, insertNewUser};
+module.exports = {fetchUsers, fetchUserByUID, insertNewUser, updateUser};

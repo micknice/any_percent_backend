@@ -9,7 +9,7 @@ const {Exercise} = require('./data/exercises')
 const {handleCustomErrors, handleServerErrors, handleMongoDBErrors} = require('./controllers/error_handling_controller')
 
 const {getExercises, getExerciseByName} = require('./controllers/exercise_controller');
-const {getUsers, getUserByUID, postNewUser} = require('./controllers/users_controller');
+const {getUsers, getUserByUID, postNewUser, patchUser} = require('./controllers/users_controller');
 
 const cors = require('cors');
 app.use(cors());
@@ -25,6 +25,7 @@ app.get('/api/users', getUsers)
 app.get('/api/users/:UID', getUserByUID)
 
 app.post('/api/users',upload.none(), postNewUser)
+app.patch('/api/users', upload.none(), patchUser)
 
 
 app.use('/*', (req, res)=> {

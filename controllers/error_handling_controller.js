@@ -1,12 +1,11 @@
 const app = require('../app');
 
 const handleServerErrors = (err, req, res, next) => {
-    console.log(err.code)
+    console.log('handleServerErrors', err)
     res.status(500).send({msg: 'internal server error'})
 }
 const handleMongoDBErrors = (err, req, res, next) => {
     if (err.code === 11000 ) {
-        console.log(err.keyPattern.userUID)
         res.status(400).send({msg: 'no duplicate keys'})
     } else {
         next(err)
