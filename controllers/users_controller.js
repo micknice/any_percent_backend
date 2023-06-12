@@ -39,6 +39,7 @@ const patchUser = (req, res, next) => {
     .then((result) => {
         res.status(200).send({updatedUser: result})
     })
+    .catch((err) => {next(err)})
 }
 
 const deleteUser = (req, res, next) => {
@@ -47,6 +48,7 @@ const deleteUser = (req, res, next) => {
     .then((result) => {
         res.status(202).send({msg: 'user successfully deleted'})
     })
+    .catch((err) => {next(err)})
 }
 
 

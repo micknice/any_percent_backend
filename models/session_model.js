@@ -8,9 +8,17 @@ const fetchSessionsByUID = (UID) => {
         
         return result      
     })
+    
 }
 
-const insertNewSession = () => {
+const insertNewSession = (UID) => {
+    const sessionId = `${UID}${Date.now()}`
+    console.log(sessionId)
+    const newSession = {userUID: UID, sessionId: sessionId}
+    return Session.create(newSession)
+    .then(result => {
+        return result
+    })
 
 }
 

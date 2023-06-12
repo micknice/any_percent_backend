@@ -22,7 +22,11 @@ const sessionSchema = new mongoose.Schema({
         required: true,
         type: String
     },
-    
+    sessionId: {
+        required: true,
+        type: String,
+        
+    },
     date: {
         required: true,
         type: Date,
@@ -30,11 +34,13 @@ const sessionSchema = new mongoose.Schema({
     },
     exercises: {
         required: true,
-        type: []
+        type: [],
+        default: []
     },
     sets: {
         required: true,
-        type: []
+        type: [],
+        default: []
     } 
 })
 // const liftSchema = new mongoose.Schema({
