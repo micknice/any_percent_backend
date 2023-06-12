@@ -5,6 +5,7 @@ const upload = multer();
 
 
 const getUsers = (req, res, next) => {
+    console.log('GETUSERS')
     return fetchUsers()
     .then((result) => {
         res.status(200).send({users: result})

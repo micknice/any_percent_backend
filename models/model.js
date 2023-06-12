@@ -17,26 +17,26 @@ const userSchema = new mongoose.Schema({
     
 })
 
-// const sessionSchema = new mongoose.Schema({
-//     userId: {
-//         required: true,
-//         type: Number
-//     },
-//     date: {
-//         required: true,
-//         type: String
-//     },
-//     exercises: {
-//         required: true,
-//         type: []
-
-//     },
-//     sets: {
-//         required: true,
-//         type: []
-//     } 
-
-// })
+const sessionSchema = new mongoose.Schema({
+    userUID: {
+        required: true,
+        type: String
+    },
+    
+    date: {
+        required: true,
+        type: Date,
+        default: Date.now()
+    },
+    exercises: {
+        required: true,
+        type: []
+    },
+    sets: {
+        required: true,
+        type: []
+    } 
+})
 // const liftSchema = new mongoose.Schema({
 //     lift: {
 //         required: true,
@@ -102,4 +102,6 @@ const Exercise = mongoose.model('Exercise', exerciseSchema)
 
 const User = mongoose.model('Users', userSchema)
 
-module.exports = {Exercise, User}
+const Session = mongoose.model('Sessions', sessionSchema)
+
+module.exports = {Exercise, User, Session}
