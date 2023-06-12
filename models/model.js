@@ -10,10 +10,6 @@ const userSchema = new mongoose.Schema({
         required: true,
         type: String
     },
-    userTrainingLog: {
-        required: true,
-        type: []
-    },
     defaultWeightUnit: {
         required: true,
         type: String

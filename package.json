@@ -17,6 +17,7 @@
     "jest-extended": "^4.0.0",
     "jest-sorted": "^1.0.14",
     "mongoose": "^7.2.3",
+    "multer": "^1.4.5-lts.1",
     "nodemon": "^2.0.22",
     "supertest": "^6.3.3"
   },

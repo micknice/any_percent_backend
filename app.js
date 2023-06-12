@@ -3,11 +3,13 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const mongoString = process.env.DATABASE_URL;
+const multer = require('multer');
+const upload = multer();
 const {Exercise} = require('./data/exercises')
 const {handleCustomErrors, handleServerErrors} = require('./controllers/error_handling_controller')
 
 const {getExercises, getExerciseByName} = require('./controllers/exercise_controller');
-const {getUsers, getUserByUID} = require('./controllers/users_controller');
+const {getUsers, getUserByUID, postNewUser} = require('./controllers/users_controller');
 
 const cors = require('cors');
 app.use(cors());
@@ -21,6 +23,8 @@ app.get('/api/exercises/:name', getExerciseByName)
 
 app.get('/api/users', getUsers)
 app.get('/api/users/:UID', getUserByUID)
+
+app.post('/api/users',upload.none(), postNewUser)
 
 
 app.use('/*', (req, res)=> {

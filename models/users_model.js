@@ -26,5 +26,18 @@ const fetchUserByUID = (UID) => {
     })
 }
 
+const insertNewUser = (userUID, userName, defaultWeightUnit) => {
+    const newUser = {
+        userUID: userUID, 
+        userName: userName, 
+        defaultWeightUnit: defaultWeightUnit
+    }
+    return User.create(newUser)
+    .then(result => {
+        return result
+    })
 
-module.exports = {fetchUsers, fetchUserByUID};
+}
+
+
+module.exports = {fetchUsers, fetchUserByUID, insertNewUser};
