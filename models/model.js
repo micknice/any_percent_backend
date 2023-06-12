@@ -32,7 +32,7 @@ const sessionSchema = new mongoose.Schema({
         type: Date,
         default: Date.now()
     },
-    exercises: {
+    stacks: {
         required: true,
         type: [],
         default: []
@@ -43,16 +43,24 @@ const sessionSchema = new mongoose.Schema({
         default: []
     } 
 })
-// const liftSchema = new mongoose.Schema({
-//     lift: {
-//         required: true,
-//         type: []
-//     },
-//     sets: {
-//         required: true, 
-//         type: []
-//     }
-// })
+const stackSchema = new mongoose.Schema({
+    sessionId: {
+        required:true,
+        type: String
+    },
+    lift: {
+        required: true,
+        type: String
+    },
+    stackId: {
+        required: true,
+        type: String,
+    },
+    sets: {
+        required: true, 
+        type: []
+    }
+})
 
 const exerciseSchema = new mongoose.Schema({   
     name: {

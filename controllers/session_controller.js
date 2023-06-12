@@ -22,6 +22,9 @@ const postNewSession = (req, res, next) => {
         res.status(201).send({msg: 'new session created', sessionId: result.sessionId})
     })
     .catch((err) => {next(err)})
+}
+const patchSessionWithStack = (req, res, next) => {
+    
 
 
 }
@@ -31,4 +34,4 @@ const postNewSession = (req, res, next) => {
 
 
 
-module.exports = {getSessionsByUID, postNewSession}
+module.exports = {getSessionsByUID, postNewSession, patchSessionWithStack}
