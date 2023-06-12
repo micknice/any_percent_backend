@@ -52,6 +52,13 @@ const updateUser = (userUID, userName, defaultWeightUnit) => {
     })
 
 }
+const removeUser = (UID) => {
+    return User.findOneAndDelete({userUID: UID})
+    .then(result => {
+        console.log('removeuser result', result)
+        return result
+    })
+}
 
 
-module.exports = {fetchUsers, fetchUserByUID, insertNewUser, updateUser};
+module.exports = {fetchUsers, fetchUserByUID, insertNewUser, updateUser, removeUser};
