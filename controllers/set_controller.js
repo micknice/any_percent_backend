@@ -10,8 +10,7 @@ const postNewSet = (req, res, next) => {
     .then((result) => {
         res.status(201).send({set: result})
     })
-    .catch((err) => {next(err)})
-    
+    .catch((err) => {next(err)})    
 }
 
 
@@ -22,7 +21,6 @@ const patchSet = (req, res, next) => {
         res.status(200).send({msg: 'set successfully updated', set: result})
     })
     .catch((err) => {next(err)})
-
 }
 
 
@@ -33,7 +31,6 @@ const deleteSet = (req, res, next) => {
         res.status(202).send({msg: 'set successfully deleted'})
     })
     .catch((err) => {next(err)})
-
 }
 
 const getSetsByStackId = (req, res, next) => {
@@ -43,11 +40,15 @@ const getSetsByStackId = (req, res, next) => {
         res.status(200).send({sets: result})
     })
     .catch((err) => {next(err)})
-
 }
 
 const getSetBySetId = (req, res, next) => {
-
+    const {setId} = req.params;
+    return fetchSetBySetId(setId)
+    .then ((result) => {
+        res.status(200).send({set: result[0]})
+    })
+    .catch((err) => {next(err)})
 }
 
 

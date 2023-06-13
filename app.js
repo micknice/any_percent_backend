@@ -42,7 +42,7 @@ app.delete('/api/stack/:stackId', deleteStack)
 
 // set
 app.get('/api/sets/:stackId', getSetsByStackId)
-app.get('/api/sets/:sessionId', getSetBySetId)
+app.get('/api/set/:setId', getSetBySetId)
 app.post('/api/set', upload.none(), postNewSet)
 app.patch('/api/set', upload.none(), patchSet)
 app.delete('/api/set/:setId', deleteSet)

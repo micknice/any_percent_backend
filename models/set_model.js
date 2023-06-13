@@ -56,8 +56,11 @@ const fetchSetsByStackId = (stackId) => {
         }
     })
 }
-const fetchSetBySetId = () => {
-
+const fetchSetBySetId = (setId) => {
+    return Set.find({setId: setId})
+    .then(result => {
+        return result
+    })
 }
 
 
