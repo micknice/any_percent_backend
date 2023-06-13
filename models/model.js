@@ -76,6 +76,10 @@ const exerciseSchema = new mongoose.Schema({
 });
 
 const setSchema = new mongoose.Schema({
+    setId: {
+        required: true,
+        type: String
+    },
     lift: {
         required: true,
         type: String

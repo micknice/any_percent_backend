@@ -4,6 +4,13 @@ const multer = require('multer');
 const upload = multer();
 
 const postNewSet = (req, res, next) => {
+    console.log('post invoked')
+    const {stackId, lift, weight, weightUnit, repsPerformed, targetReps, setType} = req.body
+    return insertNewSet(stackId, lift, weight, weightUnit, repsPerformed, targetReps, setType)
+    .then((result) => {
+        res.status(201).send({set: result})
+    })
+    .catch((err) => {next(err)})
     
 }
 
