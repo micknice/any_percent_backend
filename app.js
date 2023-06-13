@@ -10,7 +10,7 @@ const {handleCustomErrors, handleServerErrors, handleMongoDBErrors} = require('.
 
 const {getExercises, getExerciseByName} = require('./controllers/exercise_controller');
 const {getUsers, getUserByUID, postNewUser, patchUser, deleteUser} = require('./controllers/users_controller');
-const {getSessionsByUID, postNewSession, patchSessionWithStack} = require('./controllers/session_controller');
+const {getSessionsByUID, postNewSession, postNewStack, patchStack, deleteStack} = require('./controllers/session_controller');
 
 const cors = require('cors');
 app.use(cors());
@@ -27,14 +27,16 @@ app.get('/api/users/:UID', getUserByUID)
 
 app.post('/api/users',upload.none(), postNewUser)
 app.patch('/api/users', upload.none(), patchUser)
-app.delete('/api/users/:UID', deleteUser)
+app.delete('/api/users/:stackId', deleteUser)
 
 // gets all sessions for given UID
 app.get('/api/session/:UID', getSessionsByUID)
 app.post('/api/session/:UID', postNewSession)
 
 
-app.patch('/api/session/stack', upload.none(), patchSessionWithStack)
+app.post('/api/stack', upload.none(), postNewStack)
+app.patch('/api/stack', upload.none(), patchStack)
+app.delete('/api/stack/:stackId', deleteStack)
 
 
 app.use('/*', (req, res)=> {

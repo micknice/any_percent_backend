@@ -34,7 +34,6 @@ const sessionSchema = new mongoose.Schema({
     stacks: {
         required: true,
         type: [],
-        default: []
     }
     
 })
@@ -109,6 +108,6 @@ const User = mongoose.model("Users", userSchema);
 
 const Session = mongoose.model("Sessions", sessionSchema);
 
-const Stack = mongoose.model("Stack", stackSchema);
+const Stack = mongoose.model("Stacks", stackSchema);
 
 module.exports = { Exercise, User, Session, Stack };
