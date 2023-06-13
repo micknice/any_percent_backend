@@ -16,6 +16,12 @@ const postNewSet = (req, res, next) => {
 
 
 const patchSet = (req, res, next) => {
+    const {setId, weight, weightUnit, repsPerformed, targetReps, setType} = req.body
+    return updateSet(setId, weight, weightUnit, repsPerformed, targetReps, setType)
+    .then((result) => {
+        res.status(200).send({msg: 'set successfully updated', set: result})
+    })
+    .catch((err) => {next(err)})
 
 }
 

@@ -14,8 +14,26 @@ const insertNewSet = (stackId, lift, weight, weightUnit, repsPerformed, targetRe
 }
 
 
-const updateSet = () => {
-
+const updateSet = (setId, weight, weightUnit, repsPerformed, targetReps, setType) => {
+    const filter = {setId: setId}
+    const update = {}
+    const updateOptions = {new: true}
+    if (weight) {update.weight = weight}
+    if (weightUnit) {update.weightUnit = weightUnit}
+    if (repsPerformed) {update.repsPerformed = repsPerformed}
+    if (targetReps) {update.targetReps = targetReps}
+    if (setType) {update.setType = setType}
+    return Set.findOneAndUpdate(filter, update, updateOptions)
+    .then(result => {
+        if (result) {
+            return result
+        } else {
+            return Promise.reject({
+                status: 404,
+                msg: 'no set with requested setId' 
+            })   
+        }
+    })
 }
 
 const removeSet = () => {
