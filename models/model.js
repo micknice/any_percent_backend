@@ -76,6 +76,10 @@ const exerciseSchema = new mongoose.Schema({
 });
 
 const setSchema = new mongoose.Schema({
+    stackId: {
+        required: true,
+        type: String
+    },
     setId: {
         required: true,
         type: String

@@ -27,10 +27,22 @@ const patchSet = (req, res, next) => {
 
 
 const deleteSet = (req, res, next) => {
+    const {setId} = req.params;
+    return removeSet(setId)
+    .then((result) => {
+        res.status(202).send({msg: 'set successfully deleted'})
+    })
+    .catch((err) => {next(err)})
 
 }
 
 const getSetsByStackId = (req, res, next) => {
+    const {stackId} = req.params;
+    return fetchSetsByStackId(stackId)
+    .then((result) => {
+        res.status(200).send({sets: result})
+    })
+    .catch((err) => {next(err)})
 
 }
 

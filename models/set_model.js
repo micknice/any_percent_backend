@@ -6,7 +6,7 @@ const insertNewSet = (stackId, lift, weight, weightUnit, repsPerformed, targetRe
     const time = Date.now().toString();
     const stackIdShortened = stackId.split('_')[1]
     const setId = `${stackIdShortened}${time.slice(6)}`
-    const newSet = {setId: setId, lift:lift, weight: weight, weightUnit, repsPerformed};
+    const newSet = {stackId: stackId, setId: setId, lift:lift, weight: weight, weightUnit, repsPerformed};
     return Set.create(newSet)
     .then(result => {
         return result
@@ -36,12 +36,25 @@ const updateSet = (setId, weight, weightUnit, repsPerformed, targetReps, setType
     })
 }
 
-const removeSet = () => {
-
+const removeSet = (setId) => {
+    return Set.findOneAndDelete({setId: setId})
+    .then(result => {
+        return result
+    })
 }
 
-const fetchSetsByStackId = () => {
-
+const fetchSetsByStackId = (stackId) => {
+    return Set.find({stackId: stackId})
+    .then((result) => {
+        if (result.length > 0) {
+            return result
+        } else {
+            return Promise.reject({
+                status: 404,
+                msg: 'no sets with requested stackId'
+            })
+        }
+    })
 }
 const fetchSetBySetId = () => {
 

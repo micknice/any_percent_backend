@@ -37,6 +37,9 @@ const handleCustomErrors = (err, req, res, next) => {
     else if (err.msg === 'no set with requested setId' && err.status === 404) {
         res.status(404).send({msg: 'no set with requested setId'})
     } 
+    else if (err.msg === 'no sets with requested stackId' && err.status === 404) {
+        res.status(404).send({msg: 'no sets with requested stackId'})
+    } 
     else {
         next(err);
     }
