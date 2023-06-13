@@ -11,32 +11,41 @@ const {handleCustomErrors, handleServerErrors, handleMongoDBErrors} = require('.
 const {getExercises, getExerciseByName} = require('./controllers/exercise_controller');
 const {getUsers, getUserByUID, postNewUser, patchUser, deleteUser} = require('./controllers/users_controller');
 const {getSessionsByUID, postNewSession, postNewStack, patchStack, deleteStack} = require('./controllers/session_controller');
-
+const {postNewSet, patchSet, deleteSet, getSetsByStackId, getSetBySetId} = require('./controllers/set_controller');
 const cors = require('cors');
 app.use(cors());
 app.use(express.json());
 
 // app.get('/api', getApi);
-
+//exercises
 // gets all exercises in db w/ no query, queries to filter by type, movementType and bodyPart
 app.get('/api/exercises', getExercises);
 app.get('/api/exercises/:name', getExerciseByName)
 
+// users
 app.get('/api/users', getUsers)
 app.get('/api/users/:UID', getUserByUID)
 
 app.post('/api/users',upload.none(), postNewUser)
 app.patch('/api/users', upload.none(), patchUser)
-app.delete('/api/users/:stackId', deleteUser)
+app.delete('/api/users/:UID', deleteUser)
 
+// session
 // gets all sessions for given UID
 app.get('/api/session/:UID', getSessionsByUID)
 app.post('/api/session/:UID', postNewSession)
 
-
+// stack
 app.post('/api/stack', upload.none(), postNewStack)
 app.patch('/api/stack', upload.none(), patchStack)
 app.delete('/api/stack/:stackId', deleteStack)
+
+// set
+app.get('/api/sets/:stackId', getSetsByStackId)
+app.get('/api/sets/:sessionId', getSetBySetId)
+app.post('/api/set,', upload.none(), postNewSet)
+app.patch('/api/set', upload.none(), patchSet)
+app.delete('/api/set/:setId', deleteSet)
 
 
 app.use('/*', (req, res)=> {

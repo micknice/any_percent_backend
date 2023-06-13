@@ -75,32 +75,32 @@ const exerciseSchema = new mongoose.Schema({
   },
 });
 
-// const setSchema = new mongoose.Schema({
-//     exerciseName: {
-//         required: true,
-//         type: String
-//     },
-//     weight: {
-//         required: true,
-//         type: Number
-//     },
-//     weightUnit: {
-//         required: true,
-//         type: String
-//     },
-//     repsPerformed: {
-//         required: true,
-//         type: Number
-//     },
-//     targetReps: {
-//         required: false,
-//         type: Number
-//     },
-//     setType: {
-//         required: true,
-//         type: String
-//     }
-// })
+const setSchema = new mongoose.Schema({
+    lift: {
+        required: true,
+        type: String
+    },
+    weight: {
+        required: true,
+        type: Number
+    },
+    weightUnit: {
+        required: true,
+        type: String
+    },
+    repsPerformed: {
+        required: true,
+        type: Number
+    },
+    targetReps: {
+        required: false,
+        type: Number
+    },
+    setType: {
+        required: false,
+        type: String
+    }
+})
 
 const Exercise = mongoose.model("Exercise", exerciseSchema);
 
@@ -110,4 +110,6 @@ const Session = mongoose.model("Sessions", sessionSchema);
 
 const Stack = mongoose.model("Stacks", stackSchema);
 
-module.exports = { Exercise, User, Session, Stack };
+const Set = mongoose.model("Sets", setSchema)
+
+module.exports = { Exercise, User, Session, Stack, Set };
