@@ -27,24 +27,24 @@ const insertNewStack = (sessionId, lift) => {
 };
 
 const updateStack = (stackId, lift) => {
-const newStackId = `${lift}_${stackId.split('_')[1]}`
-const filter = {stackId: stackId}
-const update = {}
-const updateOptions = {new: true}
-if (lift) {update.lift = lift}
-if (stackId) {update.stackId = newStackId}
-    return Stack.findOneAndUpdate(filter, update, updateOptions)
-    .then(result => {
-        if(result) {
-            return result;
-        } else {
-            return Promise.reject({
-                status: 404,
-                msg: 'no stack with requested StackId'
-            })
-            
-        }
-    })
+  const newStackId = `${lift}_${stackId.split('_')[1]}`
+  const filter = {stackId: stackId}
+  const update = {}
+  const updateOptions = {new: true}
+  if (lift) {update.lift = lift}
+  if (stackId) {update.stackId = newStackId}
+      return Stack.findOneAndUpdate(filter, update, updateOptions)
+      .then(result => {
+          if(result) {
+              return result;
+          } else {
+              return Promise.reject({
+                  status: 404,
+                  msg: 'no stack with requested StackId'
+              })
+              
+          }
+      })
 }
 
 const removeStack = (stackId) => {
